@@ -86,6 +86,51 @@ class UserController extends Controller
             ]);
         }
 
+        $users = User::all();
+        foreach ($users as $man) {
+
+            if ($man->sex == 'm') {
+
+                foreach ($users as $woman) {
+
+                    if ($woman->sex == 'w') {
+                        $countPlanet = 0;
+
+                        foreach ($man->planets as $manPlanet) {
+                            if ($manPlanet->planet_name == 'Кету')
+                                break;
+                            $countMatch = 0;
+                            foreach ($woman->planets as $womanPlanet) {
+                                if ($manPlanet->planet_name == $womanPlanet->planet_name) {
+                                    $relation = PlanetRelation::where('man_sign', $manPlanet->planet_zodiac_sign)
+                                        ->where('woman_sign', $womanPlanet->planet_zodiac_sign)
+                                        ->select('count_planet', 'strength')
+                                        ->get();
+                                    if (empty($relation->first())) {
+                                        $relation = PlanetRelation::where('woman_sign', $manPlanet->planet_zodiac_sign)
+                                            ->where('man_sign', $womanPlanet->planet_zodiac_sign)
+                                            ->select('count_planet')
+                                            ->get();
+                                    }
+                                    $countMatch = $countMatch + $relation->first()['count_planet'];
+                                }
+                                if ($womanPlanet->planet_name == 'Раху')
+                                    break;
+                            }
+                            $countPlanet = $countPlanet + $countMatch;
+                        }
+                        if (empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
+                            UsersRelation::create([
+                                'user_id' => $man->id,
+                                'woman_id' => $woman->id,
+                                'planets_match' => $countPlanet
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
         return redirect('/users');
     }
 

@@ -18,19 +18,14 @@ class PlanetRelationController extends Controller
      */
     public function index()
     {
-        if (UsersRelation::where('user_id'))
         $users = User::all();
-        foreach ($users as $user) {
+        foreach ($users as $man) {
 
-            if ($user->sex == 'm') {
-                $man_id = $user->id;
-                $man = $user;
+            if ($man->sex == 'm') {
 
-                foreach ($users as $user) {
+                foreach ($users as $woman) {
 
-                    if ($user->sex == 'w') {
-                        $woman = $user;
-                        $woman_id = $user->id;
+                    if ($woman->sex == 'w') {
                         $countPlanet = 0;
 
                         foreach ($man->planets as $manPlanet) {
@@ -56,10 +51,10 @@ class PlanetRelationController extends Controller
                             }
                             $countPlanet = $countPlanet + $countMatch;
                         }
-                        if ( empty (UsersRelation::where('user_id', $man_id)->where('woman_id', $woman_id)->get()->first())) {
+                        if ( empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
                             UsersRelation::create([
-                                'user_id' => $man_id,
-                                'woman_id' => $woman_id,
+                                'user_id' => $man->id,
+                                'woman_id' => $woman->id,
                                 'planets_match' => $countPlanet
                             ]);
                         }

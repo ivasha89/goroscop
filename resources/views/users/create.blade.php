@@ -51,8 +51,8 @@
                 <thead class="thead-dark">
                     <tr>
                         @foreach($planets as $key => $planet)
-                            <th scope="col" class="h3 rounded text-center">
-                                Планета {{ $key }}
+                            <th scope="col" class="h3 rounded text-center text-truncate">
+                                {{ $key }}
                             </th>
                         @endforeach
                     </tr>

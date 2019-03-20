@@ -17,6 +17,19 @@
             height: 100vh;
             margin: 0;
         }
+
+        /*.sticky-left {
+            position: sticky;
+            left: 0;
+        }*/
+        .table-striped {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .text-truncate {
+            width: 11.1%;
+        }
         .full-height {
             height: 100vh;
         }
@@ -48,12 +61,11 @@
         }
 
         .title {
-            font-size: 84px;
+            font-size: 64px;
         }
 
-        .links > a {
+        .links {
             color: #636b6f;
-            padding: 0 25px;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: .1rem;
@@ -110,6 +122,8 @@
             $('#shadowjQ1').mouseover(function () {
                 $('#shadowjQ1').addClass('shadow');
             });
+        });
+        $(function () {
             $('#shadowjQ').mouseout(function () {
                 $('#shadowjQ').removeClass('shadow');
                 $('#shadowjQ').addClass('shadow-sm');
@@ -117,11 +131,6 @@
             $('#shadowjQ1').mouseout(function () {
                 $('#shadowjQ1').removeClass('shadow');
                 $('#shadowjQ1').addClass('shadow-sm');
-            });
-        });
-        $(function () {
-            $('#file-input-label').click(function () {
-                $('#file-input').removeAttr('readonly');
             });
         });
     </script>

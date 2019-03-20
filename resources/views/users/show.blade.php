@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-2">
         <div class="col-10 text-center align-self-center border bg-light rounded-pill">
-            <h1 class="title">{{ $user->username }}</h1>
+            <p class="title">{{ $user->username }}</p>
         </div>
 
         <div class="col-2">
@@ -18,7 +18,7 @@
         <thead class="thead-light">
             <tr>
                 @foreach($user->planets as $planet)
-                    <th scope="col" class="h3 rounded text-center">
+                    <th scope="col" class="h3 rounded text-center text-truncate">
                         {{ $planet->planet_name }}
                     </th>
                 @endforeach

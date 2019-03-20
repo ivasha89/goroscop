@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-2">
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
-            <a href="/users/{{$usersRelation->user['id']}}" class="title h1">
+            <a href="/users/{{$usersRelation->user['id']}}" class="title">
                 {{ $usersRelation->user['username'] }}
             </a>
         </div>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
-            <a href="/users/{{ $woman->first()['id'] }}" class="title h1">
+            <a href="/users/{{ $woman->first()['id'] }}" class="title">
                 {{ $woman->first()['username'] }}
             </a>
         </div>
@@ -51,7 +51,7 @@
                     }
                     $relationColor = $relation->first()['color'];
                 @endphp
-                <th scope="col" class="h3 rounded text-center" style="background-color: {{ $relationColor }}">
+                <th scope="col" class="h3 rounded text-center text-truncate" style="background-color: {{ $relationColor }}">
                     {{ $usersRelation->user->planets[$j]->planet_name }}
                 </th>
             @endfor
