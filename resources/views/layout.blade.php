@@ -27,9 +27,9 @@
             width: 100%;
         }
 
-        .text-truncate {
+        /*.text-truncate {
             width: 11.1%;
-        }
+        }*/
         .full-height {
             height: 100vh;
         }
@@ -64,14 +64,14 @@
             font-size: 64px;
         }
 
-        .links {
+        /*.links {
             color: #636b6f;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
-        }
+        }*/
 
         .m-b-md {
             margin-bottom: 30px;
