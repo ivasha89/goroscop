@@ -15,21 +15,19 @@
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
             height: 100vh;
-            margin: 0;
         }
 
-        /*.sticky-left {
+        .sticky-left {
             position: sticky;
             left: 0;
-        }*/
-        .table-striped {
+        }
+        table {
             table-layout: fixed;
-            width: 100%;
         }
 
-        /*.text-truncate {
-            width: 11.1%;
-        }*/
+        td, th {
+            width: 11%;
+        }
         .full-height {
             height: 100vh;
         }
@@ -64,14 +62,14 @@
             font-size: 64px;
         }
 
-        /*.links {
+        .links {
             color: #636b6f;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
-        }*/
+        }
 
         .m-b-md {
             margin-bottom: 30px;
@@ -100,38 +98,11 @@
 
     <script src="{{ url('js/jquery.min.js') }}"></script>
     <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url('js/spinner.js') }}"></script>
+    <script src="{{ url('js/shadow.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.toast').toast('show');
-        });
-    </script>
-    <script>
-        $(function () {
-            $('body > .spinner-border').addClass('d-none');
-            $('.page-header, .page-main, .page-footer').removeClass('d-none');
-        });
-        $(function () {
-            $('a, span').click(function () {
-                $('span > .spinner-border').removeClass('d-none');
-            });
-        });
-        $(function () {
-            $('#shadowjQ').mouseover(function () {
-                $('#shadowjQ').addClass('shadow');
-            });
-            $('#shadowjQ1').mouseover(function () {
-                $('#shadowjQ1').addClass('shadow');
-            });
-        });
-        $(function () {
-            $('#shadowjQ').mouseout(function () {
-                $('#shadowjQ').removeClass('shadow');
-                $('#shadowjQ').addClass('shadow-sm');
-            });
-            $('#shadowjQ1').mouseout(function () {
-                $('#shadowjQ1').removeClass('shadow');
-                $('#shadowjQ1').addClass('shadow-sm');
-            });
         });
     </script>
 </body>

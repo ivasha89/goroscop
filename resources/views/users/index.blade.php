@@ -1,23 +1,34 @@
 @extends('layout')
 
 @section('content')
-<div class="table-responsive">
     <table class="table table-bordered shadow">
         <thead>
-        <tr>
-            <th class="h5" scope="col">
-                Матаджи \ Прабху
+        <tr class="table-danger">
+            <th scope="col" class="bg-light border-secondary" style="width: 11em;">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="mb-3">
+                            <img style="height: 100px;" src="/svg/name.jpg" class="img-thumbnail rounded" alt="...">
+                        </div>
+                        <div style="letter-spacing: 12px" class="font-weight-normal">
+                             Прабху
+                        </div>
+                    </div>
+                    <div class="col-3 text-break font-weight-normal" style="width: 1em; font-size: small ">Матаджи</div>
+                </div>
             </th>
             @foreach($users as $user)
                 @if($user->sex == 'w')
-                    <th scope="col">
-                            <a href="/users/{{ $user->id }}">
+                    <th scope="col" class="sticky-top border-white" style="width: 11em;">
+                        <div class="text-center">
+                            <a href="/users/{{ $user->id }}" class="links">
                                 <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="95"
                                      class="img-thumbnail rounded" alt="...">
-                                <p>
+                                <div class="text-break">
                                     {{ $user->username }}
-                                </p>
+                                </div>
                             </a>
+                        </div>
                     </th>
                 @endif
             @endforeach
@@ -27,20 +38,24 @@
         @foreach($users as $user)
             @if($user->sex == 'm')
                 <tr>
-                    <th scope="row">
-                            <a href="/users/{{ $user->id }}" class="links">
-                                <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="95"
-                                     class="img-thumbnail rounded" alt="...">
-                                <p>
-                                    {{ $user->username }}
-                                </p>
-                            </a>
-                    </th>
+                    <td class="sticky-left table-warning">
+                        <div class="text-center">
+                        <a href="/users/{{ $user->id }}" class="links">
+                            <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="95"
+                                 class="img-thumbnail rounded" alt="...">
+                            <div>
+                                {{ $user->username }}
+                            </div>
+                        </a>
+                        </div>
+                    </td>
                     @foreach($user->matches as $match)
                         <td>
+                            <div class="d-flex justify-content-center">
                                 <a href="/compare/{{ $match->id }}">
                                     {{ $match->planets_match }}
                                 </a>
+                            </div>
                         </td>
                     @endforeach
                 </tr>
@@ -48,5 +63,4 @@
         @endforeach
         </tbody>
     </table>
-</div>
 @endsection

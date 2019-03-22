@@ -16,5 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('users', 'UserController');
-Route::get('/compare', 'PlanetRelationController@index');
+Route::get('/collection/{user}', 'PlanetRelationController@index');
 Route::get('/compare/{usersRelation}', 'PlanetRelationController@show');
+Route::get('/compare','PlanetRelationController@showMore');

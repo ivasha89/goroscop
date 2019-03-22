@@ -6,6 +6,7 @@ use App\PlanetRelation;
 use App\User;
 use App\UsersRelation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Constraint\IsFalse;
 
@@ -13,56 +14,25 @@ class PlanetRelationController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $users = User::all();
-        foreach ($users as $man) {
-
-            if ($man->sex == 'm') {
-
-                foreach ($users as $woman) {
-
-                    if ($woman->sex == 'w') {
-                        $countPlanet = 0;
-
-                        foreach ($man->planets as $manPlanet) {
-                            if ($manPlanet->planet_name == 'Кету')
-                                break;
-                            $countMatch = 0;
-                            foreach ($woman->planets as $womanPlanet) {
-                                if ($manPlanet->planet_name == $womanPlanet->planet_name) {
-                                    $relation = PlanetRelation::where('man_sign', $manPlanet->planet_zodiac_sign)
-                                        ->where('woman_sign', $womanPlanet->planet_zodiac_sign)
-                                        ->select('count_planet', 'strength')
-                                        ->get();
-                                    if (empty($relation->first())) {
-                                        $relation = PlanetRelation::where('woman_sign', $manPlanet->planet_zodiac_sign)
-                                            ->where('man_sign', $womanPlanet->planet_zodiac_sign)
-                                            ->select('count_planet')
-                                            ->get();
-                                    }
-                                    $countMatch = $countMatch + $relation->first()['count_planet'];
-                                }
-                                if ($womanPlanet->planet_name == 'Раху')
-                                    break;
-                            }
-                            $countPlanet = $countPlanet + $countMatch;
-                        }
-                        if ( empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
-                            UsersRelation::create([
-                                'user_id' => $man->id,
-                                'woman_id' => $woman->id,
-                                'planets_match' => $countPlanet
-                            ]);
-                        }
-                    }
-                }
-            }
+        if ($user->sex == 'm') {
+            $otherSexUsers = User::where('sex', 'w')->get();
+            $matches = UsersRelation::where('user_id', $user->id)->orderBy('planets_match', 'desc')->get();
+            foreach ($matches as $match)
+                $match->otherSexUser_id = $match->woman_id;
         }
-        return view('compare.index', compact('user'));
+        else {
+            $otherSexUsers = User::where('sex', 'm')->get();
+            $matches = UsersRelation::where('woman_id', $user->id)->orderBy('planets_match', 'desc')->get();
+            foreach ($matches as $match)
+                $match->otherSexUser_id = $match->user_id;
+        }
+
+        return view('users.compare', compact('user', 'otherSexUsers', 'matches'));
     }
 
     /**
@@ -70,9 +40,12 @@ class PlanetRelationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function showMore()
     {
-        //
+            $users = User::all();
+            $matches = UsersRelation::orderBy('planets_match', 'desc')->get();
+
+        return view('compare.showMore', compact('users', 'matches'));
     }
 
     /**

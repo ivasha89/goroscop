@@ -19,6 +19,51 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        foreach ($users as $man) {
+
+            if ($man->sex == 'm') {
+
+                foreach ($users as $woman) {
+
+                    if (empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
+
+                        if ($woman->sex == 'w') {
+                            $countPlanet = 0;
+
+                            foreach ($man->planets as $manPlanet) {
+                                if ($manPlanet->planet_name == 'Кету')
+                                    break;
+                                $countMatch = 0;
+                                foreach ($woman->planets as $womanPlanet) {
+                                    if ($manPlanet->planet_name == $womanPlanet->planet_name) {
+                                        $relation = PlanetRelation::where('man_sign', $manPlanet->planet_zodiac_sign)
+                                            ->where('woman_sign', $womanPlanet->planet_zodiac_sign)
+                                            ->select('count_planet', 'strength')
+                                            ->get();
+                                        if (empty($relation->first())) {
+                                            $relation = PlanetRelation::where('woman_sign', $manPlanet->planet_zodiac_sign)
+                                                ->where('man_sign', $womanPlanet->planet_zodiac_sign)
+                                                ->select('count_planet')
+                                                ->get();
+                                        }
+                                        $countMatch = $countMatch + $relation->first()['count_planet'];
+                                    }
+                                    if ($womanPlanet->planet_name == 'Раху')
+                                        break;
+                                }
+                                $countPlanet = $countPlanet + $countMatch;
+                            }
+                            UsersRelation::create([
+                                'user_id' => $man->id,
+                                'woman_id' => $woman->id,
+                                'planets_match' => $countPlanet
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
         return view('users.index', compact('users'));
     }
 
@@ -46,24 +91,18 @@ class UserController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'sex' => ['required', 'min:1'],
-            'asc' => ['min:1', 'max:2'],
-            'moon' => ['min:1', 'max:2'],
-            'moon_house' => ['min:1', 'max:2'],
-            'sun' => ['min:1', 'max:2'],
-            'sun_house' => ['min:1', 'max:2'],
-            'mercury' => ['min:1', 'max:2'],
-            'mercury_house' => ['min:1', 'max:2'],
-            'vinus' => ['min:1', 'max:2'],
-            'vinus_house' => ['min:1', 'max:2'],
-            'mars' => ['min:1', 'max:2'],
-            'mars_house' => ['min:1', 'max:2'],
-            'jupiter' => ['min:1', 'max:2'],
-            'jupiter_house' => ['min:1', 'max:2'],
-            'saturn' => ['min:1', 'max:2'],
-            'saturn_house' => ['min:1', 'max:2'],
-            'rahu' => ['min:1', 'max:2'],
-            'rahu_house' => ['min:1', 'max:2']
+            'asc' => ['gt: 0', 'lt: 13']
         ]);
+
+        $planets = [
+            'Луна' => 'moon', 'Солнце' => 'sun', 'Меркурий' => 'mercury', 'Венера' => 'vinus', 'Марс' => 'mars', 'Юпитер' => 'jupiter', 'Сатурн' => 'saturn', 'Раху' => 'rahu', 'Кету' => 'ketu'
+        ];
+        foreach($planets as $planet) {
+            $request->validate([
+                $planet => ['gt: 0', 'lt: 13'],
+                $planet.'_house' => ['gt: 0', 'lt: 13'],
+            ]);
+        }
         User::create([
             'username' => $request->username,
             'sex' => $request->sex,
@@ -71,10 +110,6 @@ class UserController extends Controller
         ]);
 
         $user_id = User::where('username', $request->username)->select('id')->get();
-
-        $planets = [
-            'Луна' => 'moon', 'Солнце' => 'sun', 'Меркурий' => 'mercury', 'Венера' => 'vinus', 'Марс' => 'mars', 'Юпитер' => 'jupiter', 'Сатурн' => 'saturn', 'Раху' => 'rahu', 'Кету' => 'ketu'
-        ];
 
         foreach ($planets as $key => $planet) {
             $planet_house = $planet . '_house';
@@ -85,52 +120,6 @@ class UserController extends Controller
                 'planet_name' => $key
             ]);
         }
-
-        $users = User::all();
-        foreach ($users as $man) {
-
-            if ($man->sex == 'm') {
-
-                foreach ($users as $woman) {
-
-                    if ($woman->sex == 'w') {
-                        $countPlanet = 0;
-
-                        foreach ($man->planets as $manPlanet) {
-                            if ($manPlanet->planet_name == 'Кету')
-                                break;
-                            $countMatch = 0;
-                            foreach ($woman->planets as $womanPlanet) {
-                                if ($manPlanet->planet_name == $womanPlanet->planet_name) {
-                                    $relation = PlanetRelation::where('man_sign', $manPlanet->planet_zodiac_sign)
-                                        ->where('woman_sign', $womanPlanet->planet_zodiac_sign)
-                                        ->select('count_planet', 'strength')
-                                        ->get();
-                                    if (empty($relation->first())) {
-                                        $relation = PlanetRelation::where('woman_sign', $manPlanet->planet_zodiac_sign)
-                                            ->where('man_sign', $womanPlanet->planet_zodiac_sign)
-                                            ->select('count_planet')
-                                            ->get();
-                                    }
-                                    $countMatch = $countMatch + $relation->first()['count_planet'];
-                                }
-                                if ($womanPlanet->planet_name == 'Раху')
-                                    break;
-                            }
-                            $countPlanet = $countPlanet + $countMatch;
-                        }
-                        if (empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
-                            UsersRelation::create([
-                                'user_id' => $man->id,
-                                'woman_id' => $woman->id,
-                                'planets_match' => $countPlanet
-                            ]);
-                        }
-                    }
-                }
-            }
-        }
-
         return redirect('/users');
     }
 
@@ -170,7 +159,7 @@ class UserController extends Controller
             $request->validate([
                 'username' => ['string', 'max:255'],
                 'sex' => ['min:1'],
-                'asc' => ['min:1'],
+                'asc' => ['gt: 0', 'lt: 13'],
             ]);
 
             DB::table('users')
@@ -189,8 +178,8 @@ class UserController extends Controller
                 $post_planet_house = $user->planets[$j]->planet_name . '_house';
 
                 $request->validate([
-                    $post_planet_name => ['min:1', 'max:2'],
-                    $post_planet_house => ['min:1', 'max:2'],
+                    $post_planet_name => ['gt: 0', 'lt: 13'],
+                    $post_planet_house => ['gt: 0', 'lt: 13'],
                 ]);
 
                 DB::table('devoutees')

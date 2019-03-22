@@ -4,6 +4,9 @@
             <a class="nav-link" href="{{ url('/users') }}">Общая таблица</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('/compare') }}">Таблица по совпадениям</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url('/users/create') }}">Внести в список</a>
         </li>
     </ul>

@@ -57,10 +57,16 @@
         <div class="col-2">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/users/{{ $user->id }}/edit">Изменить</a>
+                    <a class="nav-link" href="/collection/{{ $user->id }}">
+                        <span class="spinner-border spinner-border-sm d-none" role="status"
+                              aria-hidden="true"></span>
+                        Все Совместимости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/{{ $user->id }}/edit">Изменить</a>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/users/{{ $user->id }}/edit">
+                        <span class="spinner-border spinner-border-sm d-none" role="status"
+                              aria-hidden="true"></span>
+                        Изменить</a>
                 </li>
             </ul>
         </div>
