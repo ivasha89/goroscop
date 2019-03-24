@@ -84,12 +84,14 @@
     <span class="sr-only">Loading...</span>
 </div>
 
-<header class="page-header d-none">
-    @include('nav')
-</header>
+@if($tkn)
+    <header class="page-header d-none">
+        @include('nav')
+    </header>
+@endif
 
 @if($errors->any())
-@include('toast')
+    @include('toast')
 @endif
 
 <main class="page-main d-none">

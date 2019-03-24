@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', 'WelcomeController@welcome');
+Route::get('/', 'WelcomeController@check');
+Route::post('/', 'WelcomeController@store');
+Route::get('/welcome', 'WelcomeController@welcome');
+
 Route::resource('users', 'UserController');
+
 Route::get('/collection/{user}', 'PlanetRelationController@index');
 Route::get('/compare/{usersRelation}', 'PlanetRelationController@show');
 Route::get('/compare','PlanetRelationController@showMore');
