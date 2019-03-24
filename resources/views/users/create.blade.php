@@ -1,51 +1,16 @@
 @extends('layout')
 
+@section('title')
+    @if($errors->any())
+        Ошибки ввода
+    @else
+        Ввод даннах
+    @endif
+@endsection
+
 @section('content')
     <form action="/users" method="post">
         @csrf
-        {{--<div class="row p-2">--}}
-
-
-
-            {{--<div class="col-3">--}}
-                {{--<div class="accordion" id="accordionExample">--}}
-                    {{--@foreach($planets as $key => $planet)--}}
-                        {{--<div class="card text-center">--}}
-                            {{--<div class="card-header" id="{{ $planet }}">--}}
-                                {{--<h2 class="mb-0">--}}
-                                    {{--<button class="btn btn-link" type="button" data-toggle="collapse"--}}
-                                            {{--data-target="#{{ $planet  }}1" aria-expanded="true"--}}
-                                            {{--aria-controls="{{ $planet }}1">--}}
-                                        {{--{{ $key }}--}}
-                                    {{--</button>--}}
-                                {{--</h2>--}}
-                            {{--</div>--}}
-
-                            {{--<div id="{{ $planet }}1" class="collapse hide" aria-labelledby="{{ $planet }}" data-parent="#accordionExample">--}}
-                                {{--<div class="card-body">--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label class="text-info" for="{{ $planet }}">Знак Зодиака--}}
-                                            {{--Планеты</label>--}}
-                                        {{--<input type="text" class="form-control" name="{{ $planet }}"--}}
-                                               {{--placeholder="{{ old($planet) }}">--}}
-                                    {{--</div>--}}
-
-                                    {{--<div class="form-group">--}}
-                                        {{--<label class="text-info" for="{{ $planet }}">Дом--}}
-                                            {{--Планеты</label>--}}
-                                        {{--<input type="text" class="form-control"--}}
-                                               {{--name="{{ $planet }}_house"--}}
-                                               {{--value="{{ old($planet.'_house') }}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endforeach--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-        {{--</div>--}}
-
         <div class="table-responsive mb-2">
             <table class="table table-bordered shadow mb-2">
                 <thead class="thead-dark">

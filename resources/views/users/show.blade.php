@@ -1,8 +1,12 @@
 @extends('layout')
 
+@section('title')
+    {{ $user->username }}. Гороскоп
+@endsection
+
 @section('content')
     <div class="row mb-2">
-        <div class="col-10 text-center align-self-center border bg-light rounded-pill">
+        <div class="col-10 text-center align-self-center border bg-light rounded-pill" id="shadowjQ1">
             <p class="title">{{ $user->username }}</p>
         </div>
 
@@ -54,20 +58,18 @@
             </tr>
         </tbody>
     </table>
-        <div class="col-2">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="/collection/{{ $user->id }}">
-                        <span class="spinner-border spinner-border-sm d-none" role="status"
-                              aria-hidden="true"></span>
-                        Все Совместимости</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/users/{{ $user->id }}/edit">
-                        <span class="spinner-border spinner-border-sm d-none" role="status"
-                              aria-hidden="true"></span>
-                        Изменить</a>
-                </li>
-            </ul>
+    <div class="d-flex">
+        <div class="p-2">
+            <a class="btn btn-outline-info" role="button" href="/collection/{{ $user->id }}">
+                <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                Все Совместимости</a>
         </div>
+        <div class="p-2 ml-auto">
+            <a class="btn btn-outline-info float-left" role="button" href="/users/{{ $user->id }}/edit">
+                <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                Изменить</a>
+        </div>
+    </div>
 @endsection

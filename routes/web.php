@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'WelcomeController@welcome');
 Route::resource('users', 'UserController');
 Route::get('/collection/{user}', 'PlanetRelationController@index');
 Route::get('/compare/{usersRelation}', 'PlanetRelationController@show');

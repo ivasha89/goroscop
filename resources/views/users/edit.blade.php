@@ -1,10 +1,18 @@
 @extends('layout')
 
+@section('title')
+    {{ $user->username }}. Изменить данные
+@endsection
+
 @section('content')
         <div class="row p-2">
+            <div class="col-5 mr-auto">
+                <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" class="border-danger img-thumbnail rounded"
+                     alt="..." id="shadowjQ">
+            </div>
             <div class="col-3">
-                <div class="card text-center">
-                    <div class="card-header">
+                <div class="card text-center border-success">
+                    <div class="card-header bg-success">
                         <h2 class="btn mb-0">
                             Изменить данные
                         </h2>
@@ -40,25 +48,23 @@
                                 </div>
                             </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-outline-info">Обновить</button>
+                            <button type="submit"  class="btn btn-outline-warning">Обновить</button>
                         </div>
                         </form>
                         <form method="post" action="/users/{{ $user->id }}">
                             @method('DELETE')
                             @csrf
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                <button type="submit" class="btn btn-outline-danger">Удалить</button>
                             </div>
                         </form>
                     </div>
             </div>
-
-
             <div class="col-3">
                 <div class="accordion" id="accordionExample">
                     @foreach($user->planets as $planet)
                         <div class="card text-center">
-                            <div class="card-header" id="{{ $planet->planet_name }}">
+                            <div class="card-header" style="height: 60px" id="{{ $planet->planet_name }}">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{ $planet->planet_name  }}1" aria-expanded="true" aria-controls="{{ $planet->planet_name }}1">
                                         {{ $planet->planet_name }}
@@ -83,23 +89,20 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-outline-info">Обновить</button>
+                                        <button type="submit" class="btn btn-outline-warning">Обновить</button>
                                     </div>
                                 </form>
                                 <form method="post" action="/users/{{ $user->id }}">
                                     @method('DELETE')
                                     @csrf
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                        <button type="submit" class="btn btn-outline-danger">Удалить</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </div>
-            <div class="col-5 ml-auto">
-                <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" class="img-thumbnail rounded" alt="..." id="shadowjQ">
             </div>
         </div>
 @endsection

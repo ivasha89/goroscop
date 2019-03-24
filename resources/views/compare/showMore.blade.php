@@ -1,9 +1,9 @@
 @extends('layout')
-
+@section('title', 'Таблица совместимых планет')
 @section('content')
     <table class="table table-striped table-bordered shadow mb-2">
         <caption>
-            Совместимости Преданного
+            Таблица Совместимостей
         </caption>
         <thead class="thead-light">
         <tr>
@@ -15,36 +15,21 @@
         </tr>
         </thead>
         <tbody>
-        @while(!empty($matches->first()))
+        @foreach ($array as $row)
             <tr>
                 @for ($j=8; $j>-1; --$j)
                     <td>
-                        @foreach($matches as $k => $match)
-                            @if($match->planets_match == $j)
-                                @foreach($users as $man)
-                                    @if($man->id == $match->user_id)
-                                        @foreach($users as $woman)
-                                            @if($woman->id == $match->woman_id)
-                                                <div class="text-center text-break border-dark">
-                                                    <a href="/compare/{{ $match->id }}" class="links">
-                                                        {{ $man->username }} +
-                                                        {{ $woman->username }}
-                                                    </a>
-                                                    @php
-                                                        unset($matches[$k]);
-                                                        break
-                                                    @endphp
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            @endif
-                        @endforeach
+                        @if(isset($row[$j]))
+                            <div class="text-center text-break border-dark">
+                                <a href="/compare/{{ $row[$j]['id'] }}" class="links">
+                                    {{ $row[$j]['names'] }}
+                                </a>
+                            </div>
+                        @endif
                     </td>
                 @endfor
             </tr>
-        @endwhile
+        @endforeach
         </tbody>
     </table>
 @endsection

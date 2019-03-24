@@ -1,5 +1,5 @@
 @extends('layout')
-
+@section('title', 'Главная таблица')
 @section('content')
     <table class="table table-bordered shadow">
         <thead>

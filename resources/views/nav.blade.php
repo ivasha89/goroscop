@@ -9,6 +9,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ url('/users/create') }}">Внести в список</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ url('/') }}">Домой</a>
+        </li>
     </ul>
         <div class="top-right links">
             <a href="https://j108.ru">Jyotish M. C.</a>

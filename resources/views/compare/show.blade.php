@@ -1,5 +1,8 @@
 @extends('layout')
-
+@section('title')
+    {{ $usersRelation->user['username'] }} +
+    {{ $woman['username'] }}
+@endsection
 @section('content')
     <div class="row mb-2">
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
@@ -13,20 +16,15 @@
             <img src="/svg/{{ $usersRelation->user['sex'] }}{{ $usersRelation->user['asc'] }}.jpg" width="195" class="img-thumbnail rounded" alt="..."
                  id="shadowjQ">
         </div>
-
-        @php
-            $woman = \App\User::where('id', $usersRelation->woman_id)->get();
-        @endphp
-
         <div class="col-2">
             Асцендент в ⤵
-            <img src="/svg/{{ $woman->first()['sex'] }}{{ $woman->first()['asc'] }}.jpg" width="195" class="img-thumbnail rounded" alt="..."
+            <img src="/svg/{{ $woman['sex'] }}{{ $woman['asc'] }}.jpg" width="195" class="img-thumbnail rounded" alt="..."
                  id="shadowjQ1">
         </div>
 
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
-            <a href="/users/{{ $woman->first()['id'] }}" class="title">
-                {{ $woman->first()['username'] }}
+            <a href="/users/{{ $woman['id'] }}" class="title">
+                {{ $woman['username'] }}
             </a>
         </div>
     </div>
@@ -37,21 +35,7 @@
         <thead class="thead-light">
         <tr>
             @for($j=0; $j<9; ++$j)
-                @php
-                    $relation = \App\PlanetRelation::where('man_sign', $usersRelation->user->planets[$j]->planet_zodiac_sign)
-                    ->where('woman_sign', $woman->first()->planets[$j]->planet_zodiac_sign)
-                    ->select('color')
-                    ->get();
-                    if (empty($relation->first()))
-                    {
-                    $relation = \App\PlanetRelation::where('woman_sign', $usersRelation->user->planets[$j]->planet_zodiac_sign)
-                    ->where('man_sign', $woman->first()->planets[$j]->planet_zodiac_sign)
-                    ->select('color')
-                    ->get();
-                    }
-                    $relationColor = $relation->first()['color'];
-                @endphp
-                <th scope="col" class="h3 rounded text-center text-truncate" style="background-color: {{ $relationColor }}">
+                <th scope="col" class="h3 rounded text-center text-truncate" style="background-color: {{ $relationColor[$j] }}">
                     {{ $usersRelation->user->planets[$j]->planet_name }}
                 </th>
             @endfor
@@ -87,7 +71,7 @@
             @endforeach
         </tr>
         <tr>
-            @foreach($woman->first()->planets as $planet)
+            @foreach($woman->planets as $planet)
                 <form method="post" action="/devoutees/{{ $planet->id }}">
                     <td scope="row">
                         <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
