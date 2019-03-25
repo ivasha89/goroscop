@@ -1,10 +1,15 @@
+@extends('layout')
+
+@section('title', 'Авторизация')
+
+@section('content')
 <div class="row justify-content-center p-2">
     <div style="width:330px">
         <div class="card text-center border-secondary">
             <div class="card-header bg-info text-white">
                 Пожалуйста введите маха-секретное кодовое слово
             </div>
-            <form action="{{ url('/') }}" method="post">
+            <form action="./" method="post">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -20,3 +25,4 @@
         </div>
     </div>
 </div>
+@endsection

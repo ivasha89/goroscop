@@ -41,6 +41,7 @@ class WelcomeController extends Controller
 
     public function check()
     {
-        return redirect('welcome');
+        $tkn = session('tkn');
+        return view('users.check', compact('tkn'));
     }
 }
