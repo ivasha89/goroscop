@@ -6,7 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
-        @yield ('title')
+        @if(session('tkn'))
+            @yield ('title')
+        @else
+            Авторизация
+        @endif
     </title>
 
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
@@ -89,7 +93,6 @@
     <header class="page-header d-none">
         @include('nav')
     </header>
-@endif
 
 @if($errors->any())
     @include('toast')
@@ -100,6 +103,10 @@
         @yield('content')
     </div>
 </main>
+@else
+    @section('title', 'Авторизация')
+    @include('users.check')
+@endif
 
     <script src="{{ url('js/jquery.min.js') }}"></script>
     <script src="{{ url('js/bootstrap.bundle.min.js') }}"></script>

@@ -43,6 +43,6 @@ class WelcomeController extends Controller
     {
         if (session('tkn'))
             session()->forget('tkn');
-        return view('users.check', compact('tkn'));
+        return view('layout', compact('tkn'));
     }
 }
