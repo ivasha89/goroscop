@@ -41,7 +41,8 @@ class WelcomeController extends Controller
 
     public function check()
     {
-        $tkn = session('tkn');
+        if (session('tkn'))
+            session()->forget('tkn');
         return view('users.check', compact('tkn'));
     }
 }

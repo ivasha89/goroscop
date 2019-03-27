@@ -6,24 +6,24 @@
 @section('content')
     <div class="row mb-2">
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
-            <a href="/users/{{$usersRelation->user['id']}}" class="title">
+            <a href='{{ url("/users/".$usersRelation->user['id']."") }}' class="title">
                 {{ $usersRelation->user['username'] }}
             </a>
         </div>
 
         <div class="col-2">
             Асцендент в ⤵
-            <img src="/svg/{{ $usersRelation->user['sex'] }}{{ $usersRelation->user['asc'] }}.jpg" width="195" class="img-thumbnail rounded" alt="..."
+            <img src='{{ url("/svg/".$usersRelation->user['sex'].$usersRelation->user['asc']."") }}.jpg' width="195" class="img-thumbnail rounded" alt="..."
                  id="shadowjQ">
         </div>
         <div class="col-2">
             Асцендент в ⤵
-            <img src="/svg/{{ $woman['sex'] }}{{ $woman['asc'] }}.jpg" width="195" class="img-thumbnail rounded" alt="..."
+            <img src='{{ url("/svg/".$woman['sex'].$woman['asc']."") }}.jpg' width="195" class="img-thumbnail rounded" alt="..."
                  id="shadowjQ1">
         </div>
 
         <div class="col-4 text-center align-self-center border bg-light rounded-pill">
-            <a href="/users/{{ $woman['id'] }}" class="title">
+            <a href='{{ url("/users/".$woman['id']."") }}' class="title">
                 {{ $woman['username'] }}
             </a>
         </div>
@@ -59,28 +59,24 @@
         </tr>
         <tr>
             @foreach($usersRelation->user->planets as $planet)
-                <form method="post" action="/devoutees/{{ $planet->id }}">
-                    <td scope="row">
-                        <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
-                        <div class="badge float-right">
-                            <img src="/svg/{{ $planet->planet_zodiac_sign }}.jpg" width="50"
-                                 class="img-thumbnail rounded shadow-sm" alt="...">
-                        </div>
-                    </td>
-                </form>
+                <td scope="row">
+                    <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
+                    <div class="badge float-right">
+                        <img src='{{ url("/svg/$planet->planet_zodiac_sign") }}.jpg' width="50"
+                             class="img-thumbnail rounded shadow-sm" alt="...">
+                    </div>
+                </td>
             @endforeach
         </tr>
         <tr>
             @foreach($woman->planets as $planet)
-                <form method="post" action="/devoutees/{{ $planet->id }}">
-                    <td scope="row">
-                        <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
-                        <div class="badge float-right">
-                            <img src="/svg/{{ $planet->planet_zodiac_sign }}.jpg" width="50"
-                                 class="img-thumbnail rounded shadow-sm" alt="...">
-                        </div>
-                    </td>
-                </form>
+                <td scope="row">
+                    <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
+                    <div class="badge float-right">
+                        <img src='{{ url("/svg/$planet->planet_zodiac_sign") }}.jpg' width="50"
+                             class="img-thumbnail rounded shadow-sm" alt="...">
+                    </div>
+                </td>
             @endforeach
         </tr>
         </tbody>

@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-9">
                         <div class="mb-3">
-                            <img style="height: 100px;" src="/svg/name.jpg" class="img-thumbnail rounded" alt="...">
+                            <img style="height: 100px;" src="{{ url('/svg/name') }}.jpg" class="img-thumbnail rounded" alt="...">
                         </div>
                         <div style="letter-spacing: 12px" class="font-weight-normal">
                              Прабху
@@ -23,8 +23,8 @@
                 @if($user->sex == 'w')
                     <th scope="col" class="sticky-top border-white" style="width: 11em;">
                         <div class="text-center">
-                            <a href="/users/{{ $user->id }}" class="links">
-                                <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="95"
+                            <a href=' {{ url("/users/$user->id") }}' class="links">
+                                <img src='{{ url ("/svg/$user->sex$user->asc") }}.jpg' width="95"
                                      class="img-thumbnail rounded" alt="...">
                                 <div class="text-break">
                                     {{ $user->username }}
@@ -42,8 +42,8 @@
                 <tr>
                     <td class="sticky-left table-warning">
                         <div class="text-center">
-                        <a href="/users/{{ $user->id }}" class="links">
-                            <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="95"
+                        <a href=' {{ url("/users/$user->id") }}' class="links">
+                            <img src='{{ url ("/svg/$user->sex$user->asc") }}.jpg' width="95"
                                  class="img-thumbnail rounded" alt="...">
                             <div>
                                 {{ $user->username }}
@@ -54,7 +54,7 @@
                     @foreach($user->matches as $match)
                         <td>
                             <div class="d-flex justify-content-center">
-                                <a href="/compare/{{ $match->id }}">
+                                <a href='{{ url("/compare/$match->id") }}'>
                                     {{ $match->planets_match }}
                                 </a>
                             </div>

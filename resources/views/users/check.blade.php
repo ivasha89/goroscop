@@ -9,7 +9,7 @@
             <div class="card-header bg-info text-white">
                 Пожалуйста введите маха-секретное кодовое слово
             </div>
-            <form action="./" method="post">
+            <form action="{{ url('./') }}" method="post">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">

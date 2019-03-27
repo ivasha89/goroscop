@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $users = User::all();
         foreach ($users as $man) {
-            if (empty (UsersRelation::where('user_id', $man->id)->get()->first())) {
+//            if (empty (UsersRelation::where('user_id', $man->id)->get()->first())) {
                 if ($man->sex == 'm') {
                     foreach ($users as $woman) {
                         if (empty (UsersRelation::where('user_id', $man->id)->where('woman_id', $woman->id)->get()->first())) {
@@ -47,7 +47,7 @@ class UserController extends Controller
                         }
                     }
                 }
-            }
+//            }
         }
 
         return view('users.index', compact('users'));

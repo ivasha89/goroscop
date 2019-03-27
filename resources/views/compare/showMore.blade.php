@@ -1,5 +1,7 @@
 @extends('layout')
+
 @section('title', 'Таблица совместимых планет')
+
 @section('content')
     <table class="table table-striped table-bordered shadow mb-2">
         <caption>
@@ -21,7 +23,7 @@
                     <td>
                         @if(isset($row[$j]))
                             <div class="text-center text-break border-dark">
-                                <a href="/compare/{{ $row[$j]['id'] }}" class="links">
+                                <a href='{{ url("/compare/".$row[$j]['id']."") }}' class="links">
                                     {{ $row[$j]['names'] }}
                                 </a>
                             </div>

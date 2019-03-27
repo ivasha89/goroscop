@@ -84,7 +84,8 @@
     <span class="sr-only">Loading...</span>
 </div>
 
-@if($tkn)
+
+@if(session('tkn'))
     <header class="page-header d-none">
         @include('nav')
     </header>

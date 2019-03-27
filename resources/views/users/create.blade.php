@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <form action="/users" method="post">
+    <form action='{{ url("/users") }}' method="post">
         @csrf
         <div class="table-responsive mb-2">
             <table class="table table-bordered shadow mb-2">

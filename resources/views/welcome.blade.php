@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-6 row">
                 <div class="col-12">
-                    <img src="svg/name.jpg" width="40%" class="img-thumbnail rounded" alt="...">
+                    <img src="{{ url('svg/name.jpg') }}" width="40%" class="img-thumbnail rounded" alt="...">
                 </div>
                 <div class="col-12 d-flex align-items-end">
                     <p class="lead">Количество преданных в базе:{{ $allUsers }}</p>

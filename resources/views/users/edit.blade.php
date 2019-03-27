@@ -7,7 +7,7 @@
 @section('content')
         <div class="row p-2">
             <div class="col-5 mr-auto">
-                <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" class="border-danger img-thumbnail rounded"
+                <img src='{{ url("/svg/$user->sex$user->asc") }}.jpg' class="border-danger img-thumbnail rounded"
                      alt="..." id="shadowjQ">
             </div>
             <div class="col-3">
@@ -17,7 +17,7 @@
                             Изменить данные
                         </h2>
                     </div>
-                        <form action="/users/{{$user->id}}" method="post" class="mb-2">
+                        <form action='{{ url("/users/$user->id") }}' method="post" class="mb-2">
                             @csrf
                             @method('PATCH')
                             <div class="card-body">
@@ -51,7 +51,7 @@
                             <button type="submit"  class="btn btn-outline-warning">Обновить</button>
                         </div>
                         </form>
-                        <form method="post" action="/users/{{ $user->id }}">
+                        <form method="post" action='{{ url("/users/$user->id") }}'>
                             @method('DELETE')
                             @csrf
                             <div class="card-footer">
@@ -73,7 +73,7 @@
                             </div>
 
                             <div id="{{ $planet->planet_name  }}1" class="collapse hide" aria-labelledby="{{ $planet->planet_name }}" data-parent="#accordionExample">
-                                <form action="/users/{{$user->id}}" method="post" class="mb-2">
+                                <form action='{{ url("/users/$user->id") }}' method="post" class="mb-2">
                                     @csrf
                                     @method('PATCH')
                                     <div class="card-body">
@@ -92,7 +92,7 @@
                                         <button type="submit" class="btn btn-outline-warning">Обновить</button>
                                     </div>
                                 </form>
-                                <form method="post" action="/users/{{ $user->id }}">
+                                <form method="post" action='{{ url("/users/$user->id") }}'>
                                     @method('DELETE')
                                     @csrf
                                     <div class="card-footer">

@@ -25,9 +25,9 @@
             @for ($j=8; $j>-1; --$j)
                 <td>
                     @if(isset($row[$j]))
-                        <a href="/compare/{{ $row[$j]['id'] }}" class="links">
+                        <a href='{{ url("compare/".$row[$j]['id']."") }}' class="links">
                             <div class="d-flex justify-content-center">
-                                <img src="/svg/{{ $row[$j]['sex'] }}{{ $row[$j]['asc'] }}.jpg" width="95" class="img-thumbnail rounded" alt="...">
+                                <img src='{{ url("/svg/".$row[$j]['sex'].$row[$j]['asc']."") }}.jpg' width="95" class="img-thumbnail rounded" alt="...">
                             </div>
                             <div class="text-center text-truncate">
                                 {{ $row[$j]['name'] }}

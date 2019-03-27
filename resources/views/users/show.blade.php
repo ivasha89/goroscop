@@ -12,7 +12,7 @@
 
         <div class="col-2">
             Асцендент в ⤵
-            <img src="/svg/{{ $user->sex }}{{ $user->asc }}.jpg" width="195" class="img-thumbnail rounded" alt="..." id="shadowjQ">
+            <img src='{{ url("/svg/$user->sex$user->asc") }}.jpg' width="195" class="img-thumbnail rounded" alt="..." id="shadowjQ">
         </div>
     </div>
     <table class="table table-striped table-bordered shadow mb-2">
@@ -50,7 +50,7 @@
                         <form method="post" action="/devoutees/{{ $planet->id }}">
                             <div class="badge badge-info float-left">{{ $planet->planet_house }}</div>
                             <div class="badge float-right">
-                                <img src="/svg/{{ $planet->planet_zodiac_sign }}.jpg" width="50" class="img-thumbnail rounded shadow-sm" alt="...">
+                                <img src='{{ url("/svg/$planet->planet_zodiac_sign") }}.jpg' width="50" class="img-thumbnail rounded shadow-sm" alt="...">
                             </div>
                         </form>
                     </td>
@@ -60,13 +60,13 @@
     </table>
     <div class="d-flex">
         <div class="p-2">
-            <a class="btn btn-outline-info" role="button" href="/collection/{{ $user->id }}">
+            <a class="btn btn-outline-info" role="button" href='{{ url("/collection/$user->id") }}'>
                 <span class="spinner-border spinner-border-sm d-none" role="status"
                       aria-hidden="true"></span>
                 Все Совместимости</a>
         </div>
         <div class="p-2 ml-auto">
-            <a class="btn btn-outline-info float-left" role="button" href="/users/{{ $user->id }}/edit">
+            <a class="btn btn-outline-info float-left" role="button" href='{{ url("/users/$user->id/edit") }}'>
                 <span class="spinner-border spinner-border-sm d-none" role="status"
                       aria-hidden="true"></span>
                 Изменить</a>
