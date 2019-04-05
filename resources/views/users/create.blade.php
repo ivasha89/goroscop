@@ -83,7 +83,7 @@
                     <input type="text" class="form-control" name="asc" id="asc"
                            placeholder="{{ old('asc') }}">
                 </div>
-                <button type="submit" class="btn btn-outline-info mb-2 float-right">
+                <button type="submit" class="btn btn-outline-info mb-2 float-right">💥️
                     <span class="spinner-border spinner-border-sm d-none" role="status"
                           aria-hidden="true"></span>
                     Сохранить
